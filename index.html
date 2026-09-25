@@ -4,6 +4,22 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="Calculadora educativa de tolerancia al riesgo: 7 preguntas y sugerencias de ETFs y acciones por nivel. No es asesoria financiera.">
+
+<!-- Google tag (gtag.js) — GA4, se activa solo si el visitante acepta cookies -->
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  var GA_ID = 'G-TYE8NRHG2E';
+  function cargarGA(){
+    if(window.__gaCargado) return; window.__gaCargado = true;
+    var s=document.createElement('script'); s.async=true;
+    s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;
+    document.head.appendChild(s);
+    gtag('js', new Date());
+    gtag('config', GA_ID);
+  }
+</script>
+
 <title>Tu Perfil de Riesgo</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,9 +57,13 @@
   --shadow:0 1px 2px rgba(0,0,0,.3), 0 14px 34px -20px rgba(0,0,0,.7);
 }
 *{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
 body{background:var(--bg); color:var(--ink); font-family:var(--ff-body);
   line-height:1.55; -webkit-font-smoothing:antialiased;}
-.wrap{max-width:760px; margin:0 auto; padding-inline:18px; padding-block:34px 48px;}
+.wrap{max-width:760px; margin:0 auto; padding-inline:18px; padding-block:34px 60px;}
 
 .eyebrow{font-family:var(--ff-mono); font-size:12px; letter-spacing:.14em;
   text-transform:uppercase; color:var(--accent-ink); font-weight:600;}
@@ -146,39 +166,41 @@ legend .qn{font-family:var(--ff-mono); color:var(--accent-ink); font-weight:600;
 .tip p{font-size:14px; color:var(--ink); line-height:1.45; padding-top:2px;}
 .tip b{font-weight:600;}
 
-.disc{margin-top:26px; font-size:12px; color:var(--faint); line-height:1.5; max-width:64ch;}
+.footer{margin-top:26px; display:flex; gap:18px; flex-wrap:wrap; align-items:center;}
+.footer a{font-size:13px; color:var(--accent-ink); text-decoration:underline; cursor:pointer;}
+.legal{margin-top:16px; background:var(--inset); border:1px solid var(--line); border-radius:14px; padding:18px 20px;}
+.legal h3{font-family:var(--ff-disp); font-weight:700; font-size:17px;}
+.legal p{font-size:13.5px; color:var(--muted); line-height:1.55; margin-top:9px;}
+.legal b{color:var(--ink); font-weight:600;}
+
+.disc{margin-top:18px; font-size:12px; color:var(--faint); line-height:1.5; max-width:64ch;}
 .disc b{color:var(--muted); font-weight:600;}
 
-@media (max-width:520px){
-  .routes{grid-template-columns:1fr;}
-}
+.cookie{position:fixed; left:0; right:0; bottom:0; z-index:60;
+  background:var(--surface); border-top:1px solid var(--line);
+  box-shadow:0 -8px 30px -20px rgba(0,0,0,.5);
+  padding:14px 18px; padding-bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  display:flex; gap:14px; align-items:center; justify-content:center; flex-wrap:wrap;}
+.cookie p{font-size:13.5px; color:var(--ink); flex:1 1 340px; max-width:60ch; line-height:1.45;}
+.cookie p a{color:var(--accent-ink); text-decoration:underline; cursor:pointer;}
+.cbtns{display:flex; gap:9px; flex:0 0 auto;}
+.cbtn{font-family:var(--ff-body); font-size:13.5px; font-weight:600; border-radius:9px;
+  padding:9px 18px; cursor:pointer; border:1px solid var(--line); transition:filter .15s;}
+.cbtn.ok{background:var(--accent); color:#fff; border-color:var(--accent);}
+.cbtn.ok:hover{filter:brightness(1.05);}
+.cbtn.no{background:var(--surface2); color:var(--ink);}
+.cbtn:focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+@media (max-width:520px){ .routes{grid-template-columns:1fr;} }
 @media (max-width:440px){
   .row{grid-template-columns:1fr; gap:4px;}
   .statpair{grid-template-columns:1fr;}
   .score .big{font-size:44px;}
 }
 @media (prefers-reduced-motion:reduce){*{animation:none!important; transition:none!important;}}
-
-/* --- reset para sitio autónomo --- */
-html{-webkit-text-size-adjust:100%}
-html,body{margin:0}
-:root{color-scheme:light}
-img{max-width:100%}
-[hidden]{display:none!important}
 </style>
-<!-- Google tag (gtag.js) — GA4 -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-TYE8NRHG2E"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-TYE8NRHG2E');
-</script>
-<!-- Fin Google tag -->
 </head>
 <body>
-
-
 <div class="wrap">
   <header>
     <div class="eyebrow">Calculadora educativa</div>
@@ -208,7 +230,27 @@ img{max-width:100%}
     <div class="tiplist" id="tiplist"></div>
   </section>
 
+  <div class="footer">
+    <a id="verPriv">Aviso de privacidad</a>
+  </div>
+
+  <section class="legal" id="privacidad" hidden>
+    <h3>Aviso de privacidad</h3>
+    <p>Este sitio es una herramienta <b>educativa y gratuita</b>. Para saber cuántas personas lo visitan y así mejorarlo, usamos Google Analytics.</p>
+    <p>Google Analytics guarda unas <b>cookies</b> en tu navegador y recoge datos <b>anónimos</b>: tu país, el tipo de dispositivo, cómo llegaste al sitio y qué ves dentro de él. <b>No pedimos ni guardamos tu nombre, correo ni ningún dato que te identifique</b>, y no vendemos ni compartimos información con fines comerciales.</p>
+    <p>Puedes usar el sitio <b>sin aceptar las cookies</b>: si las rechazas, no se activa Google Analytics y la calculadora funciona igual. Al pulsar “Aceptar” consientes su uso; puedes cambiar de opinión borrando los datos del sitio en tu navegador.</p>
+    <p>Recuerda: este contenido es solo educativo y <b>no es asesoría financiera</b>.</p>
+  </section>
+
   <p class="disc"><b>Aviso.</b> Esta herramienta es educativa y no constituye asesoría financiera ni una recomendación personalizada. Los ETF y las acciones son solo ejemplos ilustrativos de cada categoría de riesgo, no sugerencias de compra: haz tu propia investigación antes de invertir. Las cifras de crecimiento y caídas son rangos históricos orientativos, no pronósticos. Invierte solo dinero que no necesites a corto plazo y, ante la duda, consulta a un profesional autorizado.</p>
+</div>
+
+<div class="cookie" id="cookie" hidden>
+  <p>Usamos cookies de Google Analytics <b>solo para contar visitas</b> y mejorar el sitio. Nada de datos personales. <a id="verPriv2">Leer más</a></p>
+  <div class="cbtns">
+    <button class="cbtn no" id="cno" type="button">Rechazar</button>
+    <button class="cbtn ok" id="cok" type="button">Aceptar</button>
+  </div>
 </div>
 
 <script>
@@ -288,7 +330,7 @@ const PROFILES = [
     note:"No es consejo financiero: son solo ejemplos de este perfil. Investiga a fondo por tu cuenta antes de tocar nada de esto." },
 ];
 
-/* build questionnaire */
+/* questionnaire */
 const form = document.getElementById('quiz');
 QUESTIONS.forEach((item,i)=>{
   const fs=document.createElement('fieldset');
@@ -305,7 +347,7 @@ QUESTIONS.forEach((item,i)=>{
   fs.appendChild(opts); form.appendChild(fs);
 });
 
-/* build tips */
+/* tips */
 const tl=document.getElementById('tiplist');
 TIPS.forEach((t,i)=>{
   const d=document.createElement('div'); d.className='tip';
@@ -317,6 +359,8 @@ const chip=(t,n)=>`<span class="chip">${t}${n?`<small>${n}</small>`:''}</span>`;
 const chips=arr=>arr.map(x=>chip(x[0],x[1])).join('');
 const levelFrom=sum=>Math.round((sum-7)/21*9+1);
 
+let curLvl=null, curProfile=null;
+
 function render(){
   let sum=0, answered=0;
   QUESTIONS.forEach((_,i)=>{
@@ -326,15 +370,16 @@ function render(){
   if(answered<QUESTIONS.length) return;
   const lvl=levelFrom(sum);
   const p=PROFILES.find(p=>lvl>=p.min&&lvl<=p.max);
+  curLvl=lvl; curProfile=p.name;
   const el=document.getElementById('result');
   el.style.setProperty('--rk', p.rk);
 
   const grow=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M17 7h4v4"/></svg>`;
   const drop=`<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8"/><path d="M17 17h4v-4"/></svg>`;
 
-  let body;
+  let bodyhtml;
   if(p.routes){
-    body=`<div class="routes">${p.routes.map(r=>`
+    bodyhtml=`<div class="routes">${p.routes.map(r=>`
       <div class="route">
         <div class="rlabel">${r.label}</div>
         <div class="rgrp"><span class="rk2">ETFs</span><div class="chips">${chips(r.etfs)}</div></div>
@@ -342,7 +387,7 @@ function render(){
         ${r.rwarn?`<div class="rwarn">${r.rwarn}</div>`:''}
       </div>`).join('')}</div>`;
   } else {
-    body=`<div class="rows">
+    bodyhtml=`<div class="rows">
       <div class="row"><div class="k">ETFs</div><div class="v"><div class="chips">${chips(p.etfs)}</div></div></div>
       <div class="row"><div class="k">Acciones</div><div class="v"><div class="chips">${chips(p.stocks)}</div>${p.stocksLabel?`<div class="note" style="margin-top:8px">${p.stocksLabel}</div>`:''}</div></div>
     </div>`;
@@ -364,12 +409,23 @@ function render(){
       <div class="stat2 grow"><div class="k">${grow} Crecimiento orientativo</div><div class="v">${p.grow}</div></div>
       <div class="stat2 draw"><div class="k">${drop} Caídas esperables</div><div class="v">${p.draw}</div></div>
     </div>
-    ${body}
+    ${bodyhtml}
     ${warn}
     ${note}`;
 }
 
-form.addEventListener('change', render);
+/* GA event: nivel de riesgo (con debounce, solo tras interacción real) */
+let evTimer=null;
+function scheduleEvent(){
+  clearTimeout(evTimer);
+  evTimer=setTimeout(()=>{
+    if(window.__gaCargado && curLvl!=null){
+      gtag('event','perfil_riesgo',{nivel:curLvl, perfil:curProfile});
+    }
+  },1200);
+}
+
+form.addEventListener('change', ()=>{ render(); scheduleEvent(); });
 document.getElementById('reset').addEventListener('click', ()=>{
   QUESTIONS.forEach((_,i)=>{
     const d=form.querySelector(`input[name="q${i}"][value="${DEFAULTS[i]}"]`);
@@ -378,8 +434,25 @@ document.getElementById('reset').addEventListener('click', ()=>{
   render();
   window.scrollTo({top:0, behavior:'smooth'});
 });
-render();
-</script>
+render(); /* estado inicial de ejemplo, sin enviar evento */
 
+/* --- consentimiento de cookies --- */
+const banner=document.getElementById('cookie');
+function getConsent(){ try{return localStorage.getItem('consent_ga');}catch(e){return null;} }
+function setConsent(v){ try{localStorage.setItem('consent_ga',v);}catch(e){} }
+(function initConsent(){
+  const c=getConsent();
+  if(c==='accepted'){ cargarGA(); banner.hidden=true; }
+  else if(c==='rejected'){ banner.hidden=true; }
+  else { banner.hidden=false; }
+})();
+document.getElementById('cok').addEventListener('click', ()=>{ setConsent('accepted'); cargarGA(); banner.hidden=true; });
+document.getElementById('cno').addEventListener('click', ()=>{ setConsent('rejected'); banner.hidden=true; });
+
+/* mostrar aviso de privacidad */
+function verPriv(){ const s=document.getElementById('privacidad'); s.hidden=false; s.scrollIntoView({behavior:'smooth'}); }
+document.getElementById('verPriv').addEventListener('click', verPriv);
+document.getElementById('verPriv2').addEventListener('click', verPriv);
+</script>
 </body>
 </html>
